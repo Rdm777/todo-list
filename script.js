@@ -69,8 +69,24 @@ function novaTarefa(){
             color: "#fff"
         });
         input.style.border = '2px solid red'
+
+    }else if(input.value.trim() == "" || input.value.includes("'") || input.value.includes('"')){
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+        });
+          Toast.fire({
+            icon: "error",
+            title: "Insira uma mensagem valida",
+            background: "#7a605b",
+            color: "#fff"
+        });
+
     }else{
-        // Salvar dados na variavem 'name'
+        // Salvar dados na variavel 'name'
         let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
         values.push({
             name: input.value

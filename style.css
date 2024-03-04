@@ -93,6 +93,12 @@ body{
     padding-bottom: 1rem;
 }
 
+#to-do-list li:hover{
+    text-indent: 0.5rem;
+    font-size: 1.15rem;
+    transition: 0.5s ease-in-out;
+}
+
 #to-do-list > li button{
     border: none;
     width: 60px;
