@@ -1,89 +1,78 @@
 const localStorageKey = 'tasks'
 
-function validarIfTarefaRepetida(){
+function ifTarefaRepetida(){
     let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
     let inputValues = document.getElementById("input-add-item").value
-    let exists = values.find(x => x.name == inputValues)
-    // Se não existe == false, caso contrario == true
-    return !exists ? false : true
+    let existe = values.find(x => x.name == inputValues)
+    return !existe ? false : true
 }
 
-// Verificar se o input tem três ou mais caracteres
-function verificarInput() {
+function contCaracter() {
     const inputValues = document.getElementById("input-add-item").value;
     const trêsOuMaisCaracteres = inputValues.length >= 3;
     return trêsOuMaisCaracteres;
 }
 
+function alterarAlertError(msg){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+    });
+        Toast.fire({
+        icon: "error",
+        title: msg,
+        background: "#7a605b",
+        color: "#fff"
+    });
+}
+
+function alterarAlertSucces(msg){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+    });
+        Toast.fire({
+        icon: "success",
+        title: msg,
+        background: "#7a605b",
+        color: "#fff"
+    });
+}   
+
 function novaTarefa(){
     let input = document.getElementById("input-add-item")
     input.style.border = ''
 
+    function inputRed(){
+        input.style.border = '2px solid red';
+    }
+
+    function inputGreen(){
+        input.style.border = '2px solid green'
+    }
+
     // Validações
     if (!input.value){
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-        });
-          Toast.fire({
-            icon: "error",
-            title: "Insira uma nova Tarefa",
-            background: "#7a605b",
-            color: "#fff"
-        });
-        input.style.border = '2px solid red'
+        alterarAlertError("Digite sua nova tarefa")
+        inputRed()
 
-    // Analisar se ja tem alguma tarefa com o mesmo nome
-    }else if(validarIfTarefaRepetida()){
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-        });
-          Toast.fire({
-            icon: "error",
-            title: "Já existe uma tarefa com este nome",
-            background: "#7a605b",
-            color: "#fff"
-        });
-        input.style.border = '2px solid red'
+    }else if(ifTarefaRepetida()){
+        alterarAlertError("Já existe uma tarefa com este nome")
+        inputRed()
 
-    // Verificar se o input tem menos de três caracteres
-    }else if(!verificarInput()){
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-        });
-          Toast.fire({
-            icon: "error",
-            title: "Sua tarefa precisa ter mais de 3 digitos.",
-            background: "#7a605b",
-            color: "#fff"
-        });
-        input.style.border = '2px solid red'
+    }else if(!contCaracter()){
+        alterarAlertError("Sua tarefa precisa ter mais de 3 digitos.")
+        inputRed()
 
     }else if(input.value.trim() == "" || input.value.includes("'") || input.value.includes('"')){
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-        });
-          Toast.fire({
-            icon: "error",
-            title: "Insira uma mensagem valida",
-            background: "#7a605b",
-            color: "#fff"
-        });
+        alterarAlertError("Insira uma mensagem valida")
+        inputRed()
 
     }else{
         // Salvar dados na variavel 'name'
@@ -95,19 +84,8 @@ function novaTarefa(){
         localStorage.setItem(localStorageKey, JSON.stringify(values))
         mostrarValores()
 
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-        });
-          Toast.fire({
-            icon: "success",
-            title: "Tarefa Adicionada com sucesso.",
-            background: "#7a605b",
-            color: "#fff"
-        });
+        alterarAlertSucces("Tarefa Adicionada com sucesso.")
+        inputGreen()
     }input.value = ''
 }
 
@@ -125,32 +103,17 @@ function mostrarValores(){
 }
 
 function removerItem(data){
-    // Pegar armazenamento Local
     let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
 
-    // Pegar dado ("name") que seja igual ao solicitado pela função ("data") e adicionar na variavel "index"
     let index = values.findIndex(x => x.name == data)
 
-    // Excluir valor adicionados acima
     values.splice(index, 1)
      
-    // Atualizar armazenamento local
     localStorage.setItem(localStorageKey,JSON.stringify(values))
     mostrarValores()
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-    });
-      Toast.fire({
-        icon: "success",
-        title: "Tarefa marcada como concluida.",
-        background: "#7a605b",
-        color: "#fff"
-    });
+    alterarAlertSucces("Tarefa marcada como concluida")
+    inputGreen()
 }
 
 mostrarValores()
