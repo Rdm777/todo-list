@@ -11,12 +11,27 @@
     font-size: 3rem;
     text-transform: uppercase;
     color:#A9D9D0;
+    text-align: center;
 }
 
 .font-conteudo{
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+.flex-column{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.flex.row{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 body{
@@ -71,6 +86,38 @@ body{
     transition: 1s;
 }
 
+.input-add-info{
+    width: 20rem;
+    border-radius: 10px;
+    padding: 1rem;
+    outline: none;
+    border: none;
+}
+
+.input-add-info:hover{
+    background-color: rgba(255, 255, 255, 0.904);
+    transition: 0.2s;
+}
+
+.button-login{
+    width: 100%;
+    height: 35px;
+    border-radius: 20px;
+    border: none;
+    background-color: #B68247;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+}
+
+.button-login:hover{
+    background-color: #b682478c;
+    transition: 1s;
+}
+
+
 .content-body{
     display: flex;
     flex-direction: column;
@@ -116,4 +163,12 @@ body{
     transition: 1s;
 }
 
+.form-label {
+    color: white;
+    margin-bottom: 1rem;
+}
 
+.nova-conta p {
+    color: white;
+    text-align: center;
+}
