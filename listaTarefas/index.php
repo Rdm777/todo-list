@@ -1,3 +1,7 @@
+<?php 
+    include("../loginAutenticacao/pageBlock.php");
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,7 +13,7 @@
     <title>Taks</title>
 
 </head>
-<body>
+<body class="body-color-2"> 
     <h1 class="font-titulo">Tarefas Diarias</h1>
 
     <div class="content">

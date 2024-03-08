@@ -7,4 +7,3 @@ if(!isset($session)){
 if(!isset($_SESSION['id'])){
      die("Você não pode acessar esta pagina. <p><a href=\"index.php\">Entrar</a><p/>");
 }
-?>  

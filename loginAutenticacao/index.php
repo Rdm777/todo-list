@@ -1,3 +1,5 @@
+<!-- Fazer o tratamento SQL Injection -->
+
 <?php 
 include ("connectDb.php");
 
@@ -37,7 +39,7 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
             $_SESSION['id'] = $usuario['id'];
             $_SESSION['email'] = $usuario['email'];
 
-            header("Location: trains.php");
+            header("Location: ../listaTarefas/index.php");
 
         // Retorne uma mensagem de erro, caso não tenha nenhum dado igual a query acima.
         } else{
@@ -53,6 +55,7 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../sweetalert.css">
     <title>Entre ou cadastre-se</title>
 
 </head>
@@ -63,13 +66,13 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
             <br>
             <form action="" method="POST">
                 <div class="flex-column">
-                    <input type="email" id="typeEmailX" name="email" class="font-conteudo input-add-info"/>
+                    <input type="email" id="typeEmailX" name="email" id="email" class="font-conteudo input-add-info"/>
                     <label class="form-label font-conteudo" for="typeEmailX">Email</label>
-                    <input type="password" id="typePasswordX" name="senha" class="font-conteudo input-add-info"/>
+                    <input type="password" id="typePasswordX" name="senha" id="senha" class="font-conteudo input-add-info"/>
                     <label class="form-label font-conteudo" for="typePasswordX">Senha</label>
                 </div>
                 <p><a  href="#!">Esqueceu a senha?</a></p>
-                <button class="button-login" type="submit">Login</button>
+                <button class="button-login" type="submit" onclick="validacao()">Login</button>
             </form>
         </div>
 
@@ -80,13 +83,8 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
 
     </section>
 
-    <!-- JQuery 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    Bootstrap tooltips
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    Bootstrap core JavaScript
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-    MDB core JavaScript
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>-->
+    <script src="script.js"></script>
+    <script src="../jquery-3.7.1.min.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
 </body>
 </html>
